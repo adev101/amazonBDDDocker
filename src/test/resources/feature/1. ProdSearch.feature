@@ -21,5 +21,11 @@ Feature: Product search on Amazon
     Given Amazon home page is launched
     When user searches for the product
     Then Lists result with minimum price on first page 
+    
+   @negative
+  Scenario: Product search
+    Given Amazon home page is launched
+    When user searches for the product
+    Then Product not found message is displayed
 
 

@@ -4,7 +4,6 @@
 
 @test
 Feature: Check broken links
-  I want to use this template for my feature file
 
   @test
   Scenario: Validate broken links on home page

@@ -7,22 +7,25 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.demo.amazonbdddocker.utilities.TestCapture;
 import com.demo.amazonbdddocker.utilities.TestConfig;
 
 public class TestFactory {
-	static String path= null;
+	static String path= null, mode=null;
 	public static WebDriver driver;
 	static String url= null, urlA=null;
 	static String currURL=null;
@@ -32,27 +35,46 @@ public class TestFactory {
 	
 	public static void getURL(String browser) throws IOException {
 		
-		path=System.getProperty("user.dir");
+		mode=TestConfig.getConfigDetails().get("mode");
 		
-		switch (browser)
-		{
-		case "chrome": 
+		if(mode.contentEquals("local")) {
+			
+			path=System.getProperty("user.dir");
+			
+			switch (browser)
+			{
+			case "chrome": 
+				System.setProperty("webdriver.chrome.driver", path+"//src//main//resources//drivers//chromedriver.exe");
+				driver=new ChromeDriver();
+				break;
+			case "IE": 
+				System.setProperty("webdriver.edge.driver", path+"//src//main//resources//drivers//IEDriverServer.exe");
+				driver= new InternetExplorerDriver();
+				break;
+			case "firefox":
+				System.setProperty("webdriver.gecko.driver", path+"//src//main//resources//drivers//geckodriver.exe");
+				driver= new FirefoxDriver();
+				break;
+			default:
+				System.out.println("Wrong Browser");
+				break;
+			}
+		}
+		else if (mode.contentEquals("remote")) {
+			DesiredCapabilities dr=null;
+			dr=DesiredCapabilities.chrome();
+			dr.setBrowserName(browser);
+			dr.setPlatform(Platform.LINUX);
+			dr.setVersion("81.0.4044.92");
+			
+			String hub=TestConfig.getConfigDetails().get("hub");
+			
 			System.setProperty("webdriver.chrome.driver", path+"//src//main//resources//drivers//chromedriver.exe");
-			driver=new ChromeDriver();
-			break;
-		case "IE": 
-			System.setProperty("webdriver.edge.driver", path+"//src//main//resources//drivers//IEDriverServer.exe");
-			driver= new InternetExplorerDriver();
-			break;
-		case "firefox":
-			System.setProperty("webdriver.gecko.driver", path+"//src//main//resources//drivers//geckodriver.exe");
-			driver= new FirefoxDriver();
-			break;
-		default:
-			System.out.println("Wrong Browser");
-			break;
+			driver=new RemoteWebDriver(new URL(hub),dr);
+			
 		}
 		
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		url=TestConfig.getConfigDetails().get("baseURL");
 		driver.get(url);
 		driver.manage().window().maximize();

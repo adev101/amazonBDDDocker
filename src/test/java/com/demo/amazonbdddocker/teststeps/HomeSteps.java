@@ -77,7 +77,11 @@ public class HomeSteps {
 		}
 	}
 
-	
-	
+    
+    
+    @Then("^Product not found message is displayed$")
+    public void display_message() {
+    	
+    }
 	
 }
