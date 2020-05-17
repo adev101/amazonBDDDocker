@@ -8,6 +8,27 @@
 		<maven.compiler.target>1.8</maven.compiler.target> 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
    </properties>
+   <build>
+    <plugins>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.1</version>
+            <configuration>
+                <fork>true</fork>
+                <executable>C:\Program Files\Java\jdk1.8.0_231\bin\javac.exe</executable>
+                        <archive>
+            <manifest>
+                <mainClass>
+                    runners.TestRunner
+                </mainClass>
+            </manifest>
+        </archive>
+            </configuration>
+            
+        </plugin>
+	 </plugins>
+	</build>
+ 
    <dependencies>
 		   <!-- https://mvnrepository.com/artifact/io.cucumber/gherkin -->
 		<dependency>
@@ -138,13 +159,4 @@
 		    <version>4.1.2</version>
 		</dependency>							
   </dependencies>
-  <build>
-	<plugins>
-		<plugin> 
-  			<groupId>org.apache.maven.plugins</groupId> 
-  			<artifactId>maven-compiler-plugin</artifactId> 
-  			<version>3.8.0</version> 
-  		</plugin>
-  	</plugins>
-  </build>
 </project>
