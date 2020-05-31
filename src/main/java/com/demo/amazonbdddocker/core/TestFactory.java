@@ -63,12 +63,15 @@ public class TestFactory {
 		else if (mode.contentEquals("remote")) {
 			DesiredCapabilities dr=null;
 			dr=DesiredCapabilities.chrome();
+			//dr=DesiredCapabilities.firefox();
 			dr.setBrowserName(browser);
 			dr.setPlatform(Platform.LINUX);
-			dr.setVersion("81.0.4044.92");
+			//dr.setVersion("75.0");
+			dr.setVersion("83.0.4103.61");
 			
 			String hub=TestConfig.getConfigDetails().get("hub");
 			
+			//System.setProperty("webdriver.gecko.driver", path+"//src//main//resources//drivers//geckodriver.exe");
 			System.setProperty("webdriver.chrome.driver", path+"//src//main//resources//drivers//chromedriver.exe");
 			driver=new RemoteWebDriver(new URL(hub),dr);
 			

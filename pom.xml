@@ -10,21 +10,14 @@
    </properties>
    <build>
     <plugins>
-        <plugin>
+            <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
+            <version>3.5.1</version>
             <configuration>
-                <fork>true</fork>
-                <executable>C:\Program Files\Java\jdk1.8.0_231\bin\javac.exe</executable>
-                        <archive>
-            <manifest>
-                <mainClass>
-                    runners.TestRunner
-                </mainClass>
-            </manifest>
-        </archive>
+                <source>1.8</source>
+                <target>1.8</target>
             </configuration>
-            
         </plugin>
 	 </plugins>
 	</build>

@@ -2,10 +2,10 @@
 #Comments: Demo project
 #Scenario Description: User needs to check if there are any broken links
 
-@test
+@test1
 Feature: Check broken links
 
-  @test
+  @test1
   Scenario: Validate broken links on home page
     Given Amazon home page is launched
     When User fetches all links on the page
