@@ -61,17 +61,13 @@ public class TestFactory {
 			}
 		}
 		else if (mode.contentEquals("remote")) {
-			DesiredCapabilities dr=null;
-			dr=DesiredCapabilities.chrome();
-			//dr=DesiredCapabilities.firefox();
+			DesiredCapabilities dr=DesiredCapabilities.chrome();
 			dr.setBrowserName(browser);
 			dr.setPlatform(Platform.LINUX);
-			//dr.setVersion("75.0");
 			dr.setVersion("83.0.4103.61");
 			
 			String hub=TestConfig.getConfigDetails().get("hub");
 			
-			//System.setProperty("webdriver.gecko.driver", path+"//src//main//resources//drivers//geckodriver.exe");
 			System.setProperty("webdriver.chrome.driver", path+"//src//main//resources//drivers//chromedriver.exe");
 			driver=new RemoteWebDriver(new URL(hub),dr);
 			
@@ -81,6 +77,7 @@ public class TestFactory {
 		url=TestConfig.getConfigDetails().get("baseURL");
 		driver.get(url);
 		driver.manage().window().maximize();
+		
 		
 		
 	}

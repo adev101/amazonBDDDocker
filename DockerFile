@@ -3,4 +3,4 @@ FROM openjdk:12-alpine
 COPY ./ /
 
 RUN ["./mvnw", "package"]
-CMD ["./mvnw", "package"]
+CMD ["./mvnw", "test"]

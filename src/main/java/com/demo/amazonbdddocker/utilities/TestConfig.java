@@ -10,9 +10,11 @@ public class TestConfig {
 
 	public static HashMap<String,String> prjProperties= new HashMap<String,String>();
 	
-	
+
 	public static HashMap<String,String> getConfigDetails() throws IOException {
 		try {
+
+			
 			String userDir=System.getProperty("user.dir");
 			File file= new File(userDir+"/src/test/resources/configuration/config.properties");
 			FileInputStream fis= new FileInputStream(file);
